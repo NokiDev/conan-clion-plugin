@@ -26,12 +26,17 @@ public class Install extends AsyncConanCommand {
         if (update) {
             addParameter("--update");
         }
+        addParameter("--build=missing");
+        addParameter("-s build_type=" + cMakeProfile.getName());//Hoping it's Release/Debug/MinSizeRel/Etc.. 
     }
 
+    //TODO add config to deactivate.
     public Install(Project project, CMakeRunner.Listener listener, CMakeProfile cMakeProfile, ConanProfile conanProfile, boolean update) {
-        super(project, conanProfile, listener, "install", project.getBasePath(), "-if=" + cMakeProfile.getTargetDir(), "-pr=" + conanProfile.getName());
+        super(project, conanProfile, listener, "install", project.getBasePath(), "-if=" + cMakeProfile.getTargetDir());
         if (update) {
             addParameter("--update");
         }
+        addParameter("--build=missing");
+        addParameter("-s build_type=" + cMakeProfile.getName());//Hoping it's Release/Debug/MinSizeRel/Etc.. //Else retrieve the correct cmake profile config used.
     }
 }
